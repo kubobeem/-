@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>あひるが くあー</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&display=swap');
+
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(#112233, #001122);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      font-family: 'Comic Neue', cursive;
+      color: #ffdd77;
+    }
+
+    .container {
+      text-align: center;
+      position: relative;
+    }
+
+    .duck {
+      font-size: 180px;
+      animation: quack 0.8s infinite alternate ease-in-out;
+      display: inline-block;
+      cursor: pointer;
+      filter: drop-shadow(0 10px 20px rgba(255, 200, 80, 0.6));
+    }
+
+    @keyframes quack {
+      from { transform: scale(1) rotate(-8deg); }
+      to   { transform: scale(1.15) rotate(8deg); }
+    }
+
+    .cry {
+      font-size: 4.5rem;
+      font-weight: 700;
+      margin: 20px 0;
+      opacity: 0;
+      animation: cryAnim 2.2s infinite;
+      text-shadow: 0 0 20px #ffaa00;
+    }
+
+    @keyframes cryAnim {
+      0%, 100% { opacity: 0; transform: translateY(30px); }
+      20% { opacity: 1; transform: translateY(0); }
+    }
+
+    .info {
+      margin-top: 40px;
+      font-size: 1.3rem;
+      opacity: 0.8;
+    }
+
+    .footer {
+      position: absolute;
+      bottom: 20px;
+      width: 100%;
+      text-align: center;
+      color: #6688aa;
+      font-size: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="duck" id="duck">🦆</div>
+    <div class="cry" id="cry">くぁー！！</div>
+    <div class="info">クリックで くあー</div>
+  </div>
+
+  <div class="footer">
+    あひるが くあー って泣くだけのサイト
+  </div>
+
+  <script>
+    const duck = document.getElementById('duck');
+    const cry = document.getElementById('cry');
+
+    function quack() {
+      cry.style.animation = 'none';
+      void cry.offsetWidth;
+      cry.style.animation = 'cryAnim 1.2s forwards';
+
+      // ちょっと大きくなる
+      duck.style.transform = 'scale(1.4) rotate(15deg)';
+      setTimeout(() => {
+        duck.style.transform = 'scale(1) rotate(0deg)';
+      }, 180);
+    }
+
+    // 自動で泣く
+    setInterval(() => {
+      quack();
+    }, 1800);
+
+    // クリックでも泣く
+    duck.addEventListener('click', quack);
+    document.body.addEventListener('click', quack);
+  </script>
+</body>
+</html>
